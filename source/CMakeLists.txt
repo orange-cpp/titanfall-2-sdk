@@ -1,0 +1,1 @@
+target_sources(titanfall2-sdk PRIVATE Player.cpp Context.cpp)

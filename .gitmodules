@@ -1,0 +1,6 @@
+[submodule "extlibs/minhook"]
+	path = extlibs/minhook
+	url = https://github.com/TsudaKageyu/minhook.git
+[submodule "extlibs/uml"]
+	path = extlibs/uml
+	url = https://github.com/orange-cpp/uml

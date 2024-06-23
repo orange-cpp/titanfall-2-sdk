@@ -1,0 +1,1 @@
+target_sources(titanfall2-sdk PRIVATE Context.h Object.h Player.h Signatures.h UserCmd.h)
