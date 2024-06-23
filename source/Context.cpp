@@ -31,7 +31,7 @@ namespace titanfall_2
         const auto Ret = originalClientmodeCreateMove(ThisPtr, a2, cmd, a4);
         static auto& context = Context::Get();
         {
-            std::scoped_lock lock(context.createMoveMutex);
+            std::scoped_lock lock(context.m_createMoveMutex);
 
             if (context.m_onCreateMovePayload.has_value())
                 context.m_onCreateMovePayload.value()(cmd);
@@ -42,7 +42,7 @@ namespace titanfall_2
     {
         static auto& context = Context::Get();
         {
-            std::scoped_lock lock(context.presentMutex);
+            std::scoped_lock lock(context.m_presentMutex);
 
             if (context.m_onSwapChainPresent.has_value())
                 context.m_onSwapChainPresent.value()(pSwapChain);
@@ -93,8 +93,15 @@ namespace titanfall_2
 
     void Context::SetOnCreateMove(const std::function<void(UserCmd*)> &func)
     {
-        std::scoped_lock lock(createMoveMutex);
+        std::scoped_lock lock(m_createMoveMutex);
 
         m_onCreateMovePayload = func;
+    }
+
+    void Context::SetOnPresent(const std::function<void(IDXGISwapChain *swapChain)> &func)
+    {
+        std::scoped_lock lock(m_presentMutex);
+
+        m_onSwapChainPresent = func;
     }
 }

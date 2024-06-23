@@ -24,11 +24,12 @@ namespace titanfall_2
         static Context& Get();
         Context(const Context& other) = delete;
         void SetOnCreateMove(const std::function<void(titanfall_2::UserCmd* cmd)>& func);
+        void SetOnPresent(const std::function<void(IDXGISwapChain* swapChain)>& func);
     private:
-        std::mutex createMoveMutex;
+        std::mutex m_createMoveMutex;
         std::optional<std::function<void(titanfall_2::UserCmd* cmd)>> m_onCreateMovePayload;
 
-        std::mutex presentMutex;
+        std::mutex m_presentMutex;
         std::optional<std::function<void(IDXGISwapChain* chain)>> m_onSwapChainPresent;
 
         Context(/* args */);
